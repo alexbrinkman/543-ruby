@@ -1,5 +1,4 @@
 module Game543
-
   class Board
 
     def initialize
@@ -22,12 +21,14 @@ module Game543
     end
 
     def to_s
-      puts "---------"
+      str = ""
+      str << "---------\n"
       @position.each do |row|
-        row.select { |e| e }.size.times { print "O " }
-        puts "\n"
+        row.select { |e| e }.size.times { str << "O " }
+        str << "\n"
       end
-      puts "---------"
+      str << "---------"
+      str
     end
 
     private
@@ -54,5 +55,4 @@ module Game543
     end
 
   end
-
 end
