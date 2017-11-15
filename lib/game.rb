@@ -27,10 +27,10 @@ module Game543
         rescue ArgumentError => e
           puts e.message
         end
-        puts @board
       else
-        search_for_move
+        @board = Search.new(@board).get_move
       end
+      puts @board
     end
 
     private
@@ -41,10 +41,6 @@ module Game543
       puts "Your move: (num)"
       num = gets.chomp
       [row, num]
-    end
-
-    def search_for_move
-      puts "searching..."
     end
 
     def switch_players
