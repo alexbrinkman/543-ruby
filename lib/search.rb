@@ -7,6 +7,7 @@ module Game543
     end
 
     def get_move
+      puts "Searching..."
       # random_move
       minimax
     end

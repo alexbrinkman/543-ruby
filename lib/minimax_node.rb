@@ -8,7 +8,7 @@ module Game543
 
     def initialize(board)
       @board = board
-      @moves = []
+      @moves = [] # Array of MinimaxNodes
       @value = 0
     end
 
