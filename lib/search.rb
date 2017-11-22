@@ -7,14 +7,18 @@ module Game543
     end
 
     def get_move
-      random_move
+      # random_move
+      minimax
     end
 
     def random_move
-      puts "Randomly choosing move..."
       available_moves = @board.available_moves
       random_move_index = rand(0..available_moves.size)
       available_moves[random_move_index]
+    end
+
+    def minimax
+      Minimax.new(@board).search
     end
 
   end
