@@ -6,7 +6,7 @@ module Game543
       @board = board
     end
 
-    def get_move
+    def find_move
       puts "Searching..."
       # random_move
       minimax

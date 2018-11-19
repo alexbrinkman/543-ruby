@@ -28,7 +28,7 @@ module Game543
           puts e.message
         end
       else
-        @board = Search.new(@board).get_move
+        @board = Search.new(@board).find_move
       end
       puts @board
     end

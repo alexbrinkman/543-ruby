@@ -1,0 +1,52 @@
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+  SupportedStyles:
+    - double_quotes
+
+Metrics/ModuleLength:
+  Max: 100
+
+Metrics/BlockLength:
+  Max: 20
+
+Metrics/ClassLength:
+  Max: 100
+
+Metrics/LineLength:
+  Max: 150
+
+Metrics/MethodLength:
+  Max: 20
+
+Metrics/AbcSize:
+  Max: 16
+  Exclude:
+
+Style/Documentation:
+  Enabled: false
+
+Style/IfInsideElse:
+  Enabled: false
+
+Layout/IndentationConsistency:
+  EnforcedStyle: normal
+  SupportedStyles:
+    - normal
+
+Layout/EmptyLinesAroundClassBody:
+  Enabled: false
+
+Layout/EmptyLinesAroundMethodBody:
+  Enabled: false
+
+Layout/EmptyLinesAroundBlockBody:
+  Enabled: false
+
+Style/RaiseArgs:
+  Enabled: false
+
+Layout/EmptyLinesAroundModuleBody:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false

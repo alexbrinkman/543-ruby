@@ -1,12 +1,12 @@
 module Game543
   class Board
 
+    # Assume the first row is FIRST_ROW_SIZE pieces, increasing 1 piece for each row.
+    FIRST_ROW_SIZE = 3
+    NUM_ROWS = 3
+
     def initialize(position = nil)
-      @position = position || [
-        [true, true, true],
-        [true, true, true, true],
-        [true, true, true, true, true]
-      ]
+      @position = position || generate_board
     end
 
     def move(row, num)
@@ -48,7 +48,7 @@ module Game543
     private
 
     def validate_move(row, num)
-      raise ArgumentError.new("Invalid row: please enter 1, 2, or 3")  if row < 1 || row > 3
+      raise ArgumentError.new("Invalid row: please enter 1-#{NUM_ROWS}") if row < 1 || row > NUM_ROWS
       raise ArgumentError.new("Invalid num: please enter at least 1 piece") if num < 1
       raise ArgumentError.new("Invalid num: please enter no more than the number remaining in the row") if num > pieces_left_in_row(row)
       raise ArgumentError.new("Invalid num: you may not take all remaining pieces") if num >= total_pieces_left
@@ -63,12 +63,10 @@ module Game543
     end
 
     def one_row_left?
-      one_row_left = false
-      if (pieces_left_in_row(1) == total_pieces_left ||
-          pieces_left_in_row(2) == total_pieces_left ||
-          pieces_left_in_row(3) == total_pieces_left)
-        one_row_left = true
+      NUM_ROWS.times do |row|
+        return true if pieces_left_in_row(row + 1) == total_pieces_left
       end
+      false
     end
 
     def update_board(row, num)
@@ -78,10 +76,17 @@ module Game543
     end
 
     def create_row(pieces)
-      raise ArgumentError.new("Invalid number of pieces: please enter 0-5")  if pieces < 0 || pieces > 5
       row = []
       pieces.times { row << true }
       row
+    end
+
+    def generate_board
+      array = []
+      NUM_ROWS.times do |size|
+        array << Array.new(FIRST_ROW_SIZE + size) { true }
+      end
+      array
     end
 
   end
