@@ -7,10 +7,14 @@ module Game543
     end
 
     def search
+      puts "Building tree..."
       root_node = MinimaxNode.new(@board).build_tree(@board)
+
+      puts "Evaluating positions..."
       root_node = assign_node_values(root_node, :max)
-      move = best_next_move(root_node, :max)[1]
-      move.board
+
+      puts "Making best move..."
+      root_node.moves.max { |a, b| a.value <=> b.value }.board
     end
 
     private

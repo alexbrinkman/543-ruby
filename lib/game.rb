@@ -3,16 +3,18 @@ module Game543
 
     def initialize
       @board = Board.new
-      @whos_move = :player1
+      @whos_move = :human
       run
     end
+
+    private
 
     def run
       puts @board
       loop do
         make_move
         if @board.winner?
-          puts "#{@whos_move} wins!"
+          puts "#{@whos_move.capitalize} wins!"
           exit
         end
         switch_players
@@ -20,7 +22,7 @@ module Game543
     end
 
     def make_move
-      if @whos_move == :player1
+      if @whos_move == :human
         move = prompt_for_move
         begin
           @board.move(move[0], move[1])
@@ -33,8 +35,6 @@ module Game543
       puts @board
     end
 
-    private
-
     def prompt_for_move
       puts "Your move: (row)"
       row = gets.chomp
@@ -44,7 +44,7 @@ module Game543
     end
 
     def switch_players
-      @whos_move = @whos_move == :player1 ? :player2 : :player1
+      @whos_move = @whos_move == :human ? :computer : :human
     end
 
   end

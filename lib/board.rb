@@ -2,7 +2,7 @@ module Game543
   class Board
 
     def initialize(position = nil)
-      @position = position || generate_board
+      @position = position || initial_board
     end
 
     def move(row, num)
@@ -33,7 +33,8 @@ module Game543
     def to_s
       str = ""
       str << "---------\n"
-      @position.each do |row|
+      @position.each_with_index do |row, index|
+        str << "row #{index + 1}: "
         row.select { |e| e }.size.times { str << "O " }
         str << "\n"
       end
@@ -77,11 +78,11 @@ module Game543
       row
     end
 
-    def generate_board
+    def initial_board
       [
         [true, true, true],
         [true, true, true, true],
-        [true, true, true, true, true],
+        [true, true, true, true, true]
       ]
     end
 
