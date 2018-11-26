@@ -32,6 +32,7 @@ module Game543
     end
 
     def best_next_move(node, min_max)
+      return [0, nil] if node.moves.empty?
       best_move_value = node.moves.first.value
       best_move = node.moves.first
       node.moves.each do |move|
