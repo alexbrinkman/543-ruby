@@ -11,7 +11,7 @@ module Game543
       root_node = MinimaxNode.new(@board).build_tree(@board)
 
       puts "Evaluating positions..."
-      root_node = assign_node_values(root_node, :max)
+      root_node = assign_node_values(root_node, :max, -10, 10)
 
       puts "Making best move..."
       root_node.moves.max { |a, b| a.value <=> b.value }.board
@@ -19,13 +19,20 @@ module Game543
 
     private
 
-    def assign_node_values(root_node, max_min)
+    def assign_node_values(root_node, max_min, alpha, beta)
       root_node.moves.each do |node|
         if node.board.winner?
           node.value = value_of_win(max_min)
         else
-          assign_node_values(node, flip_max_min(max_min))
+          assign_node_values(node, flip_max_min(max_min), alpha, beta)
           node.value = best_next_move(node, flip_max_min(max_min))[0]
+          if max_min == :max
+            alpha = node.value if (node.value > alpha)
+            break if (alpha >= beta) # beta prune
+          else
+            beta = node.value if (node.value < beta)
+            break if (alpha >= beta) # alpha prune
+          end
         end
       end
       root_node
