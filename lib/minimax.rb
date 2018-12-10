@@ -2,13 +2,15 @@ module Game543
 
   class Minimax
 
+    MAX_DEPTH = 8
+
     def initialize(board)
       @board = board
     end
 
     def search
       puts "Building tree..."
-      root_node = MinimaxNode.new(@board).build_tree(@board)
+      root_node = build_tree(@board)
 
       puts "Evaluating positions..."
       root_node = assign_node_values(root_node, :max, -10, 10)
@@ -18,6 +20,15 @@ module Game543
     end
 
     private
+
+    def build_tree(board, depth=0)
+      root_node = MinimaxNode.new(board)
+      return root_node if depth > MAX_DEPTH
+      board.available_moves.each do |b|
+        root_node.moves << build_tree(b, depth + 1)
+      end
+      root_node
+    end
 
     def assign_node_values(root_node, max_min, alpha, beta)
       root_node.moves.each do |node|
