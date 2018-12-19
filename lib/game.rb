@@ -30,7 +30,7 @@ module Game543
           puts e.message
         end
       else
-        @board = Search.new(@board).find_move
+        @board = Minimax.new(@board).search
       end
       puts @board
     end
