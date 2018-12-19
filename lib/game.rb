@@ -16,6 +16,9 @@ module Game543
         if @board.winner?
           puts "#{@whos_move.capitalize} wins!"
           exit
+        elsif @board.draw?
+          puts "It's a draw."
+          exit
         end
         switch_players
       end
@@ -25,7 +28,7 @@ module Game543
       if @whos_move == :human
         move = prompt_for_move
         begin
-          @board.move(move[0], move[1])
+          @board.move(move[0], move[1], "O")
         rescue ArgumentError => e
           puts e.message
         end
@@ -38,9 +41,9 @@ module Game543
     def prompt_for_move
       puts "Your move: (row)"
       row = gets.chomp
-      puts "Your move: (num)"
-      num = gets.chomp
-      [row, num]
+      puts "Your move: (col)"
+      col = gets.chomp
+      [row, col]
     end
 
     def switch_players

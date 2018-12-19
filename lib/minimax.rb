@@ -2,7 +2,7 @@ module Game543
 
   class Minimax
 
-    MAX_DEPTH = 8
+    MAX_DEPTH = 9
 
     def initialize(board)
       @board = board
@@ -21,11 +21,11 @@ module Game543
 
     private
 
-    def build_tree(board, depth=0)
+    def build_tree(board, depth=0, max_min=:max)
       root_node = MinimaxNode.new(board)
       return root_node if depth > MAX_DEPTH
-      board.available_moves.each do |b|
-        root_node.moves << build_tree(b, depth + 1)
+      board.available_moves(max_min).each do |b|
+        root_node.moves << build_tree(b, depth + 1, flip_max_min(max_min))
       end
       root_node
     end
